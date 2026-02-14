@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #0b1c2d, #02040a);
+  overflow: hidden;
+}
+
+
+#live-data {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(100, 160, 255, 0.35);
+  backdrop-filter: blur(8px);
+
+  padding: 14px 18px;
+  border-radius: 12px;
+
+  color: #cfe9ff;
+  font-family: "Segoe UI", monospace;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+
+  box-shadow: 0 0 18px rgba(80, 140, 255, 0.2);
+  transform: translate(0, 0) scale(1);
+  transform-origin: top left;
+
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s ease,
+    background 0.6s ease,
+    backdrop-filter 0.6s ease,
+    opacity 0.6s ease;
+
+  cursor: pointer;
+
+  
+}
+
+#live-data h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+  color: #7fb7ff;
+}
+
+#live-data p {
+  margin: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#live-data .label {
+  color: #8fbfff;
+}
+
+/* CLICKABLE */
+#live-data.clickable {
+  cursor: pointer;
+}
+
+
+
+/* ===== LIVE MODE ===== */
+body.live-mode #live-data {
+  transform: translate(9vw, 13vh) scale(1.9);
+  width: 420px;
+  height: 360px;
+
+}
+
+
+#chart-wrapper {
+  margin-top: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease;
+}
+
+body.live-mode #chart-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+/* GRAPH FADE */
+
+#live-data::after {
+  content: "Click to expand";
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+body.live-mode #live-data::after {
+  content: "Click to collapse";
+}
+
+
+/* EARTH MOVE */
+body.live-mode #earth-wrapper {
+  transform: translateX(35vw) scale(1.7);
+}
+
+
+
+/* Dashboard Panel */
+#panel {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 280px;
+  padding: 20px;
+  background: rgba(5, 15, 30, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  border-radius: 8px;
+}
+
+/* Titles */
+#panel h2, #panel h1 {
+  margin: 0 0 12px 0;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #7ddcff;
+}
+
+/* Sensor Values */
+#panel p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #cbefff;
+}
+
+/* Sensor Numbers */
+#panel span {
+  font-weight: 600;
+  color: #00eaff;
+}
+
+/* Buttons */
+#panel button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #02040a;
+  background: linear-gradient(90deg, #00c8ff, #00f0ff);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#panel button:hover {
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
+}
+
+/* Links */
+#panel a {
+  display: inline-block;
+  margin-top: 14px;
+}
+
+
+.nasa-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00c8ff;
+  text-decoration: none;
+  border: 1px solid rgba(0, 200, 255, 0.4);
+  border-radius: 4px;
+  background: rgba(0, 200, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.nasa-btn:hover {
+  background: rgba(0, 200, 255, 0.15);
+  border-color: #00c8ff;
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.4);
+}
+
+
+/* ===== THEORY PAGE OVERRIDES ===== */
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #0b1c2d, #02040a);
+  color: #e0f7ff;
+}
+
+#live-data {
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== THEORY MODE ===== */
+
+body {
+  overflow: hidden;
+}
+
+
+/* Live data fades */
+/* PANEL DEFAULT STATE */
+
+/* THEORY MODE → FADE OUT */
+body.theory-mode #live-data {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* BACK → FADE IN AUTOMATIC */
+/* ===== COLLAPSE FIX (SMOOTH RETURN) ===== */
+body:not(.live-mode) #live-data {
+  transition:
+    transform 1.1s cubic-bezier(0.34, 0.01, 0.24, 1),
+    box-shadow 0.6s ease,
+    background 0.6s ease,
+    backdrop-filter 0.6s ease,
+    opacity 0.6s ease;
+}
+
+body:not(.live-mode) #live-data {
+  opacity: 0.98;
+}
+
+
+#theory-panel {
+  position: fixed;
+  top: 0;
+  right: -50vw;   /* FULLY hidden */
+  width: 45vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #050d18, #02040a);
+  color: #e0f7ff;
+  padding: 32px;
+  overflow-y: auto;
+  transition: right 1s ease;
+  z-index: 20;
+}
+
+/* Slide in */
+body.theory-mode #theory-panel {
+  right: 0;
+}
+
+#sunWave.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(60%);
+  box-shadow: none;
+}
+
+
+
+/* ===== TOP NAVIGATION ===== */
+
+#top-nav {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  z-index: 10;
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+#earth-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  transition: transform 1.2s ease;
+}
+
+
+/* MOVE + ZOOM EARTH */
+body.theory-mode #earth-wrapper {
+  transform: translateX(-45vw) scale(1.9);
+}
+
+
+#earth-wrapper canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#emergency-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(120, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+#emergency-overlay.active {
+  opacity: 1;
+}
+
+.alert-text {
+  font-size: 48px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: #fff;
+  text-shadow:
+    0 0 20px rgba(255, 80, 80, 0.8),
+    0 0 60px rgba(255, 0, 0, 0.8);
+  animation: alertPulse 1.2s infinite;
+}
+
+@keyframes alertPulse {
+  0% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+

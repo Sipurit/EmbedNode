@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Earth Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+
+<body>
+  <div id="emergency-overlay">
+    <div class="alert-text">⚠ SOLAR STORM ALERT ⚠</div>
+  </div>
+
+  <div id="earth-wrapper"></div>
+
+  <!-- LIVE DATA PANEL -->
+  <!-- =========================
+     LIVE MAGNETIC DATA PANEL
+========================= -->
+<div id="live-data" class="clickable">
+  <h3>Live Geomagnetic Data</h3>
+
+  <p>
+    <span class="label">Magnetic Field Strength</span>
+    <span id="b_strength">0.00 µT</span>
+  </p>
+
+  <p>
+    <span class="label">Current Direction</span>
+    <span id="current_dir">—</span>
+  </p>
+
+  <p>
+    <span class="label">Magnetic Field Direction</span>
+    <span id="b_dir">(0, 0, 0)</span>
+  </p>
+
+  <!-- Chart จะถูก inject ตอน expand -->
+  <div id="chart-wrapper"></div>
+</div>
+
+
+
+
+  <!-- TOP NAV -->
+  <div id="top-nav">
+    <button id="sunWave" class="nasa-btn">SUN WAVE</button>
+    <button id="theoryBtn" class="nasa-btn">VIEW THEORY</button>
+  </div>
+
+  <!-- THEORY PANEL -->
+  <div id="theory-panel">
+    <button id="backBtn" class="nasa-btn small">← BACK</button>
+
+    <h1>Magnetic Field Theory</h1>
+
+    <!-- ===== AMPERE LAW ===== -->
+    <section class="theory-section">
+      <h3>Biot - Savant's Law</h3>
+
+      <div class="formula">
+        $$ B = \frac{\mu_0 IN   }{L} $$
+      </div>
+
+      <div class="variables">
+        <p><strong>$B$</strong> — สนามแม่เหล็ก (T)</p>
+        <p><strong>$\mu_0$</strong> — ค่าความซึมซาบทางแม่เหล็กในสูญญากาศ -> $4\pi \times 10^{-7}\; \text{H/m}$</p>
+        <p><strong>$I$</strong> — กระแสที่ไหลผ่าน (A)</p>
+        <p><strong>$N$</strong> — จำนวนรอบในการพันของขดลวด (รอบ)</p>
+        <p><strong>$L$</strong> — ความยาวของขดลวด (m)</p>
+      </div>
+    </section>
+
+
+<!-- ===== COPPER RESISTANCE ===== -->
+    <section class="theory-section">
+       <h3>Electrical Resistance of Copper</h3>
+
+       <div class="formula">
+      $$
+        R = \rho \frac{L}{A}
+      $$
+      </div>
+
+    <div class="variables">
+        <p><strong>$R$</strong> — ความต้านทานไฟฟ้า (Ω)</p>
+        <p><strong>$\rho$</strong> — ความต้านทานจำเพาะของทองแดง 
+        $(\approx 1.68 \times 10^{-8}\; \Omega\cdot m)$</p>
+        <p><strong>$L$</strong> — ความยาวของตัวนำ (m)</p>
+        <p><strong>$A$</strong> — พื้นที่หน้าตัดของตัวนำ (m²)</p>
+    </div>
+    </section>
+
+
+  </div>
+
+  <!-- THREE.JS -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158/build/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
