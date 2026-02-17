@@ -158,13 +158,20 @@ const textureLoader = new THREE.TextureLoader();
 const sunTexture = textureLoader.load('textures/sun_surface.jpg');
 sunTexture.wrapS = sunTexture.wrapT = THREE.RepeatWrapping;
 
+const sunDetail = loader.load('textures/sun_detail.png');
+sunDetail.wrapS = sunDetail.wrapT = THREE.RepeatWrapping;
+sunDetail.repeat.set(4,4);
+
 const sunMaterial = new THREE.MeshStandardMaterial({
   map: sunTexture,
+  emissiveMap: sunDetail,
   emissive: new THREE.Color(0xff5500),
   emissiveIntensity: 1.2,
   roughness: 0.4,
   metalness: 0.0
 });
+
+
 
 const light = new THREE.PointLight(0xffffff, 2);
 light.position.set(2.8, 0.8, 1);
@@ -422,6 +429,9 @@ function animate() {
   clouds.rotation.y += 0.0011;
   sunTexture.offset.x += 0.0005;
   sunTexture.offset.y += 0.0003;
+  sunDetail.offset.x -= 0.0006;
+  sunDetail.offset.y += 0.0004;
+
 
   sunCore.rotation.y += 0.002;
 
