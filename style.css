@@ -353,4 +353,12 @@ body.theory-mode #earth-wrapper {
   100% { opacity: 0.6; transform: scale(1); }
 }
 
+/* ===== THEORY MODE — LIVE DATA EXIT (NORMAL STATE FIX) ===== */
 
+body.theory-mode:not(.live-mode) #live-data {
+  opacity: 0;
+  transform: translateX(-60px) scale(0.96);
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease;
+}
