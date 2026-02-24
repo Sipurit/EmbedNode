@@ -133,6 +133,20 @@ void loop() {
     Serial.printf("B=%.2f µT dir=%s\n", strength, getDirection(x,y).c_str());
   }
 }
+
+// void handleCommand(const char* cmd) {  ---- FOR sun wave receive command
+//   if (strcmp(cmd, "SOLAR_STORM") == 0) {
+//     // do something! e.g. flash LED, buzzer, etc.
+//     digitalWrite(2, HIGH);
+
+//   } else if (strcmp(cmd, "SOLAR_STORM_END") == 0) {
+//     digitalWrite(2, LOW);
+//   }
+// }
+
+
+
+
 // ```
 
 // ---

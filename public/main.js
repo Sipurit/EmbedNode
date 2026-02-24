@@ -588,6 +588,8 @@ sunWave.onclick = () => {
   // Optional: visual feedback
   sunWave.classList.add("disabled");
 
+  sendCommand("SOLAR_STORM");
+
   // 1. Sun charge
   sunPulse = 3.5;
 
@@ -624,6 +626,7 @@ sunWave.onclick = () => {
     document.getElementById("emergency-overlay").classList.remove("active");
 
     // 🔓 UNLOCK (allow next use)
+    sendCommand("SOLAR_STORM_END"); 
     sunWaveLocked = false;
     sunWave.classList.remove("disabled");
 
